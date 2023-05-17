@@ -7,7 +7,7 @@ export const metadata  = {
 const productPage = () => {
   return (
     <div>
-      <h1>Assssasdsadasdsad</h1>
+      <h1>Assssasdsadasdsad dsad</h1>
     </div>
   )
 }
