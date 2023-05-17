@@ -1,15 +1,15 @@
-import React from 'react'
+import LoadingPage from '../loadig'
 
-export const metadata  = {
-    title : 'products',
-}
+export const metadata = {
+  title: "products",
+};
 
-const productPage = () => {
+const productPage = async () => {
   return (
     <div>
-      <h1>Assssasdsadasdsad dsad</h1>
+      <h1>Assssasdsadasdsad</h1>
     </div>
-  )
-}
+  );
+};
 
-export default productPage
+export default productPage;

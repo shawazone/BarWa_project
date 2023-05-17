@@ -1,11 +1,20 @@
-export const metadata = {
-  title: "Home page",
-};
+import ourPic from 'public/ourPic.svg'
+import LoadingPage from './loadig';
+import Image from 'next/image';
 
-export default function Home() {
+
+
+const HomePage = () => {
   return (
-    <div>
-      <p>welcome to BarWa</p>
-    </div>
-  );
-}
+
+    <>
+      <h1>welcome to barwa</h1>
+      <Image height={80} width={80} src={ourPic } alt="Image" />  
+      <LoadingPage />
+    </>
+  )
+  }
+
+
+
+export default HomePage;
