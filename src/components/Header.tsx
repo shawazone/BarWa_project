@@ -1,9 +1,10 @@
-import React from "react";
 import Link from "next/link";
 
 const Header = () => {
+
+
   return (
-    <header>
+    <>
       <div className="bg-gray-100 shadow">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-4">
@@ -109,17 +110,18 @@ const Header = () => {
                   </a>
                 </div>
               </div>
-              <a
+   
+            </div>
+            <Link
                 href="/login"
                 className="text-gray-800 text-sm font-semibold border  px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600"
               >
                 Login
-              </a>
-            </div>
+              </Link>
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 };
 
