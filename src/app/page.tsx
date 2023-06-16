@@ -1,5 +1,5 @@
-import ourPic from "../public/ourPic.svg";
-import Image from "next/image";
+// import ourPic from "../public/ourPic.svg";
+// import Image from "next/image";
 
 const HomePage = () => {
   return (

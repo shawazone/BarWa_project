@@ -1,21 +1,27 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-// import { registerUser } from "@/app/api/handler/route";
-import { db } from '@vercel/postgres';
+// import { createUser } from "@/app/api/handler/route";
 
 const RegisterForm = () => {
-  const [name, setName] = useState("");
+
+  const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
 
-  const submitHandler = (e :any) => {
+  const submitHandler =  async (e :any) => {
     
      e.preventDefault();
-    //  registerUser(name , email,password);
-    // console.log(name, email, password);
-    setName('');
+    
+     try {
+      // const newUser = await createUser(username, email, password);
+      // Call any other functions or perform any actions with the newUser object
+    } catch (error) {
+      // Handle the error
+    }
+      
+    setUserName('');
     setEmail('');
     setPassword('');
   };
@@ -40,8 +46,8 @@ const RegisterForm = () => {
                 type="text"
                 id="name_field"
                 className="w-full border border-gray-300 rounded px-3 py-2"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
 

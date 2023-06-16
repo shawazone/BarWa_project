@@ -1,11 +1,21 @@
 "use client";
+import { signOut } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import next from 'public/barwa-low-resolution-logo-black-on-transparent-background.png'
+import next from "public/barwa-low-resolution-logo-black-on-transparent-background.png";
+import { useSession } from "next-auth/react";
+
+
 
 const Header = () => {
+
+
+
+ const {data: session}= useSession();
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  // const session =  getServerSession(authOptions);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -17,7 +27,7 @@ const Header = () => {
         <div className="flex items-center justify-between py-4">
           <div>
             <Link href="/" className="text-gray-600">
-            <Image src={next} alt="My Image"  width={60} />
+              <Image src={next} alt="My Image" width={60} />
             </Link>
           </div>
 
@@ -47,12 +57,13 @@ const Header = () => {
               Products
             </a>
           </div>
-          <div className="absolute right-32">
+
+          <div className="right right-32 ">
             <div
               onClick={toggleDropdown}
               className="rounded-full w-10 h-10 flex items-center hover:cursor-pointer"
             >
-             Settings
+              Settings
             </div>
 
             <div
@@ -74,23 +85,42 @@ const Header = () => {
               >
                 Settings
               </a>
+              {session?.user ?(
               <a
                 href="javascript:void(0)"
                 className="block py-2 px-5 text-base font-semibold text-body-color hover:bg-primary    text-black hover:bg-red-300 hover:rounded-lg  hover:border-transparent hover:border-1
-                 hover:border-red-700
-  "
-
+                 hover:border-red-700"
+                onClick={() => signOut()}
               >
-                Logout
+                sign out
               </a>
+
+              ):''}
             </div>
           </div>
-          <Link
-            href="/login"
-            className="focus:outline-none text-gray-800 bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 "
-          >
-            Login
-          </Link>
+          <div>
+          {session?.user ?(
+             <p>welcome</p>
+          ):(
+            <div style={{ display: 'flex', gap: '10px' }}>
+            <Link
+              href="/register"
+              className="focus:outline-none text-gray-800 bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5"
+            >
+              register
+            </Link>
+          
+            <Link
+              href="/ServerSignIN"
+              className="focus:outline-none text-gray-800 bg-gray-100 hover:bg-gray-300 focus:ring-4 focus:ring-gray-800 font-medium rounded-lg text-sm px-5 py-2.5"
+            >
+              signin
+            </Link>
+          </div>
+          
+          )}
+          
+          </div>
         </div>
       </div>
     </nav>
