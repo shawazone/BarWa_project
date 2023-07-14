@@ -1,3 +1,4 @@
+'use client'
 export interface IButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
@@ -50,6 +51,8 @@ const Button = ({
   };
   return (
     <button
+
+    
       {...props}
       type={type}
       className={`
@@ -57,6 +60,8 @@ const Button = ({
         ${getVariant()}  transition duration-500  ${
         !paddingLess && "py-2 px-4"
       }  ${!square && "rounded-md"} active:scale-95 ${className} `}
+
+      onClick={()=>console.log('clicked')}
     >
       {children}
     </button>

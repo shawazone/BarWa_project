@@ -2,7 +2,10 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { NextResponse } from 'next/server'
+import { useSession } from "next-auth/react";
+import { redirect } from 'next/navigation';
+
+// import bcrypt from 'bcrypt'
 interface FormValues {
   username: string;
   email: string;
@@ -38,10 +41,24 @@ const initialValues: FormValues = {
 
 
 const MyForm: React.FC = () => {
+  const {data:session}= useSession()
+ if(session){
+  redirect('/');
+ }
+
 
     const handleSubmit = async (values: FormValues) => {
       
-      const response = await
+      // const hashedPassword = await bcrypt.hash(values.password, 10);
+
+
+      // const payload = {
+      //   ...values,
+      //   password: hashedPassword,
+      // };
+
+      
+    const response = await
     fetch('http://localhost:3000/api/user', {
     method: 'POST',
         body: JSON.stringify(values),
@@ -49,17 +66,20 @@ const MyForm: React.FC = () => {
          'Content-type':'application/json',
        }, 
     });
-    const data = await response.json()
-
+   
+    // const data = await response.json()
+    //  console.log('this is the response :',response)
+    window.location.href = "/logIn";
+     
   }
 
- const  makeApiCall = async () => {
-  await fetch('/api/user',{
-    method : 'POST',
-    body: JSON.stringify({hello : 'world'}),
+//  const  makeApiCall = async () => {
+//   await fetch('/api/user',{
+//     method : 'POST',
+//     body: JSON.stringify({hello : 'world'}),
 
-  })
- }
+//   })
+//  }
 
 
 
@@ -121,7 +141,7 @@ const MyForm: React.FC = () => {
         </Form>
       </Formik>
       <div>
-        <button onClick={makeApiCall}>make uwu API call</button>
+        {/* <button onClick={makeApiCall}>make uwu API call</button> */}
       </div>
     </div>
   );

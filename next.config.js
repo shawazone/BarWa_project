@@ -1,4 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    experimental: {
+        serverActions: true,
+    }
+}
 
-module.exports = nextConfig
+module.exports = {
+    ...nextConfig,
+    env: {
+        GITHUB_ID: process.env.GITHUB_ID,
+        GUTHUB_SECRET: process.env.GITHUB_SECRET,
+    },
+}

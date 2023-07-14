@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/products/layout.tsx", "src/app/layout.tsx", "src/app/page.tsx", "src/components/Dropdown.jsx", "src/components/oldDB"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/productsPage/layout.tsx", "src/app/layout.tsx", "src/app/page.tsx", "src/components/Dropdown.jsx", "src/components/oldDB", "src/utils/authOptions.js", "src/app/api/auth/[...nextauth]/route.ts", "src/components/Product.tsx", "src/app/productsPage/page.jsx", "src/components/Header.tsx"],
   "exclude": ["node_modules"]
 }

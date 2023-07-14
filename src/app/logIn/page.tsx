@@ -1,82 +1,73 @@
-"use client";
-import Link from "next/link";
+'use client'
+import React, { useRef } from 'react'
+import TextBox from '@/components/elements/TextBox';
+import Button from '@/components/elements/Button';
+import { signIn } from "next-auth/react";
 import { FaGoogle, FaGithub, FaFacebook } from "react-icons/fa";
-import React, { useState } from "react";
-// import { signIn } from "next-auth/react";
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { useSession } from "next-auth/react";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const logINPage = () => {
+const {data:session}= useSession()
+ if(session){
+  redirect('/');
+ }
 
-  const submitHandler = async (e:any) => {
-    e.preventDefault();
 
-  //   try {
-  //     const data = await signIn("credentials", {
-  //       redirect: false,
-  //       email,
-  //       password,
-  //     });
-
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  
+  const email = useRef("");
+  const passWord = useRef(""); 
+  const onSubmit = async () => {
+    
+    const result = await signIn("credentials", {
+      email: email.current,
+      password: passWord.current,
+      redirect: true,
+      callbackUrl: "/",
+    });
+  
+  // console.log({email,passWord});
   };
 
+  const handleGitHubSignIn =async () => {
+    const result = await  signIn('github',{callbackUrl: "/",});
+     
+  };
+
+  const handleGoogleSignIn =async () => {
+    const result = await  signIn('google',{callbackUrl: "/",});
+     
+  };
+
+
+  const handleFaceBookSignIn =async () => {
+    const result = await  signIn('facebook',{callbackUrl: "/",});
+     
+  };
   return (
-    <div className="container mx-auto mt-5">
-      <div className="flex justify-center">
-        <div className="w-96">
-          <form
-            className="border border-gray-400 rounded p-4"
-            onSubmit={submitHandler}
-          >
-            <h1 className="mb-4 text-center text-2xl font-bold">Login</h1>
-            <div className="mb-4">
-              <label className="block mb-2" htmlFor="email_field">
-                Email address
-              </label>
-              <input
-                type="email"
-                id="email_field"
-                className="w-full border border-gray-300 rounded px-3 py-2"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+    <div
+      className={
+        "flex flex-col justify-center items-center  h-screen "
+      }
+    >
+    
 
-            <div className="mb-4">
-              <label className="block mb-2" htmlFor="password_field">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password_field"
-                className="w-full border border-gray-300 rounded px-3 py-2"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded mb-4"
-            >
-              Sign in
-            </button>
-
-            <div className="text-center mb-4">
-              <p>
-                Not a member?{" "}
-                <Link href="/register">
-                 Register
-                </Link>
-              </p>
-            </div>
-
-            <div className="flex justify-center space-x-2">
+      <div className="px-7 py-4 shadow bg-white rounded-md flex flex-col gap-2">
+        <TextBox lableText="Email" onChange={(e) => (email.current = e.target.value)} />
+        <TextBox
+          lableText="Password"
+          type={"password"}
+          onChange={(e) => (passWord.current = e.target.value)}
+        />
+        {/* <Button  className='primary'onClick={onSubmit}>Login</Button> */}
+        <button  onClick={onSubmit}  className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+  Log In
+</button>
+      
+      <div className="flex justify-center space-x-2">
               <button
+               onClick={handleGoogleSignIn}
                 type="button"
                 className="w-10 bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded flex items-center justify-center"
               >
@@ -84,6 +75,7 @@ const Login = () => {
                 
               </button>
               <button
+              onClick={handleGitHubSignIn}
                 type="button"
                 className="w-10 bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 rounded flex items-center justify-center"
               >
@@ -91,19 +83,22 @@ const Login = () => {
                 
               </button>
               <button
+               onClick={handleFaceBookSignIn}
                 type="button"
                 className="w-10 bg-blue-600 hover:bg-blue-700 text-white font-bold py-0 rounded flex items-center justify-center"
               >
                 <FaFacebook />
                 
               </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
 
+            </div>
+            <div>don't have an account ? <Link href="/register" className="text-blue-500">register</Link></div>
+            </div>
+    </div>
+
+);
+    
+  
 };
 
-export default Login;
+export default logINPage
